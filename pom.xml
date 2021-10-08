@@ -36,24 +36,17 @@
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.seleniumhq.selenium</groupId>-->
-<!--            <artifactId>selenium-chrome-driver</artifactId>-->
-<!--            <version>${selenium.version}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.4.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.21.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.github.hakky54/consolecaptor -->
         <dependency>
             <groupId>io.github.hakky54</groupId>
             <artifactId>consolecaptor</artifactId>
@@ -84,7 +77,6 @@
                 <version>${maven-surefire.version}</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <!-- pass testng.xml files as argument from command line -->
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
