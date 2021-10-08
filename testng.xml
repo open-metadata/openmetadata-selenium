@@ -1,9 +1,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-    <suite name = "Suite1">
-        <test name="Test1">
-            <classes>
-                <class name = "org.openmetadata.selenium.initAndIngest.StartServerAndIngestSampleDataTest"/>
-                <class name = "org.openmetadata.selenium.pages.MyDataPageTest"/>
-            </classes>
-        </test>
-    </suite>
+<suite name="Integration-Tests">
+    <test name="startServerAndIngestDataTest">
+        <classes>
+            <class name="org.openmetadata.selenium.initAndIngest.StartServerAndIngestSampleDataTest"/>
+        </classes>
+    </test>
+    <test name="pagesTests">
+        <classes>
+            <class name="org.openmetadata.selenium.pages.MyDataPageTest"/>
+        </classes>
+    </test>
+</suite>

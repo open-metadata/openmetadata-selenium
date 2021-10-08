@@ -14,6 +14,7 @@ public class MyDataPageTest {
 
     static WebDriver webDriver;
     String homeXPath = "/html/body/div/div/div[2]/div[1]/div/div[1]/a";
+    static String url = Property.getInstance().getURL();
     Integer waitTime = Property.getInstance().getSleepTime();
 
     @BeforeMethod
@@ -21,7 +22,7 @@ public class MyDataPageTest {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/macM1/chromedriver");
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
-        webDriver.get("http://localhost:8585");
+        webDriver.get(url);
 
     }
 
