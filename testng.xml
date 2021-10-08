@@ -9,6 +9,7 @@
         <classes>
             <class name="org.openmetadata.selenium.pages.MyDataPageTest"/>
             <class name="org.openmetadata.selenium.pages.TeamsPageTest"/>
+            <class name="org.openmetadata.selenium.pages.TagsPageTest"/>
         </classes>
     </test>
 </suite>
