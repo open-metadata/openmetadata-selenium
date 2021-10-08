@@ -25,7 +25,7 @@ public class TeamsPageTest {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/macM1/chromedriver");
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
-        webDriver.get("http://localhost:8585");
+        webDriver.get(URL);
     }
 
     @Test(priority = 1)
