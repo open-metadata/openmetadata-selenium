@@ -8,6 +8,7 @@
     <test name="pagesTests">
         <classes>
             <class name="org.openmetadata.selenium.pages.MyDataPageTest"/>
+            <class name="org.openmetadata.selenium.pages.TeamsPageTest"/>
         </classes>
     </test>
 </suite>
