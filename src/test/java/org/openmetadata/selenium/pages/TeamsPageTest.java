@@ -75,10 +75,9 @@ public class TeamsPageTest {
         Thread.sleep(waitTime);
         webDriver.findElement(By.cssSelector("[data-testid='add-description']")).click();
         Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/dialog/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div/div/div/div/div")).clear();
+        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/dialog/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div/div/div/div/div")).sendKeys(faker.address().toString());
         Thread.sleep(waitTime);
         webDriver.findElement(By.cssSelector("[data-testid='save']")).click();
-        Thread.sleep(waitTime);
     }
 
     @Test(priority = 5)
