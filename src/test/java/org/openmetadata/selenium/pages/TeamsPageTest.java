@@ -79,7 +79,7 @@ public class TeamsPageTest {
     @Test(priority = 5)
     public void addAsset() throws InterruptedException {
         openTeamsPage();
-        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ "Adams" +"')]] ")))).click();// Select the created listed team
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ teamDisplayName +"')]] ")))).click();// Select the created listed team
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='assets']")))).click(); // Assets
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[4]/a/button")))).click(); // Explore
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[1]/nav/div[2]/div[1]/span[2]/button")))); // Sort by
@@ -90,14 +90,14 @@ public class TeamsPageTest {
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div[2]/div[1]/nav/span/span/button")))).click(); // Manage
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='owner-dropdown']")))).click(); // Owner
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[placeholder='Search...']"))));
-        webDriver.findElement(By.cssSelector("[placeholder='Search...']")).sendKeys("Adams");
+        webDriver.findElement(By.cssSelector("[placeholder='Search...']")).sendKeys(teamDisplayName);
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='list-item']")))); // Select User/Team
         webDriver.findElement(By.cssSelector("[data-testid='list-item']")).click(); // Select User/Team
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div[2]/div[2]/div/div[3]/button[2]")))).click(); // Save
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div/button")))).click(); // Setting
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div[2]/div/div[1]/a")))).click(); // Setting/Teams
-        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ "Adams" +"')]] "))));// Select the created listed team
-        webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ "Adams" +"')]] ")).click();// Select the created listed team
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ teamDisplayName +"')]] "))));// Select the created listed team
+        webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ teamDisplayName +"')]] ")).click();// Select the created listed team
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='assets']"))));
         webDriver.findElement(By.cssSelector("[data-testid='assets']")).click();
         wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='user-card-container']"))));
