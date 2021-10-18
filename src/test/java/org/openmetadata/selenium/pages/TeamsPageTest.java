@@ -6,10 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.ArrayList;
 
 public class TeamsPageTest {
@@ -19,11 +23,15 @@ public class TeamsPageTest {
     Integer waitTime = Property.getInstance().getSleepTime();
     static Faker faker = new Faker();
     static String teamDisplayName = faker.name().lastName();
+    static Actions actions;
+    static WebDriverWait wait;
 
     @BeforeMethod
     public void openMetadataWindow() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/macM1/chromedriver");
         webDriver = new ChromeDriver();
+        actions = new Actions(webDriver);
+        wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
         webDriver.manage().window().maximize();
         webDriver.get(URL);
     }
@@ -31,90 +39,69 @@ public class TeamsPageTest {
     @Test(priority = 1)
     public void openTeamsPage() throws InterruptedException {
         webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/dialog/div[2]/div[1]/div")).click(); // Close What's new
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div/button")).click(); // Setting
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div[2]/div/div[1]/a")).click(); // Setting/Teams
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div/button")))).click(); // Setting
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div[2]/div/div[1]/a")))).click(); // Setting/Teams
         Thread.sleep(waitTime);
     }
 
     @Test(priority = 2)
     public void createTeam() throws InterruptedException {
         openTeamsPage();
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[1]/div[1]/span/span/button")).click();
-        Thread.sleep(waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[1]/div[1]/span/span/button")))).click();
         webDriver.findElement(By.name("name")).sendKeys(faker.name().firstName());
-        webDriver.findElement(By.name("displayName")).sendKeys(teamDisplayName);
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/form/div[2]/div/div/div/div[3]/div/div[2]/div/div/div[2]/div/div/div/div/div/div")).sendKeys(faker.address().toString());
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/form/div[2]/div/div/div/div[3]/div/div[1]/nav/p[2]")).click();
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/form/div[3]/button[2]")).click();
-        Thread.sleep(waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.name("displayName")))).sendKeys(teamDisplayName);
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/form/div[2]/div/div/div/div[3]/div/div[2]/div/div/div[2]/div/div/div/div/div/div")))).sendKeys(faker.address().toString());
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/form/div[2]/div/div/div/div[3]/div/div[1]/nav/p[2]")))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/form/div[3]/button[2]")))).click();
     }
 
     @Test(priority = 3)
     public void addUser() throws InterruptedException {
         openTeamsPage();
-        webDriver.findElement(By.xpath("//div[@class='side-panel']//div[last()]//p[last()]")).click();
-        Thread.sleep(waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ teamDisplayName +"')]] ")))).click();// Select the created listed team
         for(int i = 0; i <=10; i++) {
-            webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[1]/span/span/button")).click();
+            wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[1]/span/span/button")))).click();
             Thread.sleep(500);
-            webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/div[2]/div[2]/div[1]/div[2]/input")).click();
-            Thread.sleep(waitTime);
-            webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/div[3]/button[2]")).click();
-            Thread.sleep(waitTime);
+            wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/div[2]/div[2]/div[1]/div[2]/input")))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/dialog/div[2]/div[3]/button[2]")))).click();
         }
     }
 
     @Test(priority = 4)
     public void editDescription() throws InterruptedException {
         openTeamsPage();
-        webDriver.findElement(By.xpath("//div[@class='side-panel']//div[last()]//p[last()]")).click();
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.cssSelector("[data-testid='add-description']")).click();
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/dialog/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div/div/div/div/div")).sendKeys(faker.address().toString());
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.cssSelector("[data-testid='save']")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ teamDisplayName +"')]] ")))).click();// Select the created listed team
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='add-description']")))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/dialog/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div/div/div/div/div")))).sendKeys(faker.address().toString());
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='save']")))).click();
     }
 
     @Test(priority = 5)
     public void addAsset() throws InterruptedException {
         openTeamsPage();
-        webDriver.findElement(By.xpath("//div[@class='side-panel']//div[last()]//p[last()]")).click(); // Select last listed team
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.cssSelector("[data-testid='assets']")).click(); // Assets
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[4]/a/button")).click(); // Explore
-        Thread.sleep(waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ teamDisplayName +"')]] ")))).click();// Select the created listed team
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='assets']")))).click(); // Assets
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[4]/a/button")))).click(); // Explore
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[1]/nav/div[2]/div[1]/span[2]/button")))); // Sort by
         webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[1]/nav/div[2]/div[1]/span[2]/button")).click(); // Sort by
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[1]/nav/div[2]/div[1]/span[2]/div/div/span[1]")).click(); // Last Updated
-        Thread.sleep(waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[1]/nav/div[2]/div[1]/span[2]/div/div/span[1]")))).click(); // Last Updated
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div/div[1]/div/h6/a/button")))); // Select Table
         webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div/div[1]/div/h6/a/button")).click(); // Select Table
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div[2]/div[1]/nav/span/span/button")).click(); // Manage
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.cssSelector("[data-testid='owner-dropdown']")).click(); // Owner
-        Thread.sleep(waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div[2]/div[1]/nav/span/span/button")))).click(); // Manage
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='owner-dropdown']")))).click(); // Owner
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[placeholder='Search...']"))));
         webDriver.findElement(By.cssSelector("[placeholder='Search...']")).sendKeys(teamDisplayName);
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/span[2]/div/div[3]/span")).click(); // Select User/Team
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div[2]/div[2]/div/div[3]/button[2]")).click(); // Save
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div/button")).click(); // Setting
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div[2]/div/div[1]/a")).click(); // Setting/Teams
-        Thread.sleep(waitTime);
-        webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[1]/div[9]")).click(); //
-        Thread.sleep(waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='list-item']")))); // Select User/Team
+        webDriver.findElement(By.cssSelector("[data-testid='list-item']")).click(); // Select User/Team
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div/div[2]/div[2]/div/div[3]/button[2]")))).click(); // Save
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div/button")))).click(); // Setting
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div[1]/div[2]/div/div[2]/div/div[1]/a")))).click(); // Setting/Teams
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ teamDisplayName +"')]] "))));// Select the created listed team
+        webDriver.findElement(By.xpath("//*[text()[contains(.,'"+ teamDisplayName +"')]] ")).click();// Select the created listed team
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='assets']"))));
         webDriver.findElement(By.cssSelector("[data-testid='assets']")).click();
-        Thread.sleep(waitTime);
+        wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.cssSelector("[data-testid='user-card-container']"))));
         webDriver.findElement(By.cssSelector("[data-testid='user-card-container']")).click();
-        Thread.sleep(waitTime);
     }
 
     @AfterMethod
