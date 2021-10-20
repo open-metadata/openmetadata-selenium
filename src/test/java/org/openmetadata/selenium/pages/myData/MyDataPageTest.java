@@ -1,4 +1,4 @@
-package org.openmetadata.selenium.pages;
+package org.openmetadata.selenium.pages.myData;
 
 import org.openmetadata.selenium.properties.Property;
 import org.openqa.selenium.By;
@@ -36,6 +36,8 @@ public class MyDataPageTest {
     public static void checkWhatsNew() {
         webDriver.findElement(By.xpath("//ul[@class='slick-dots testid-dots-button']//li[2]")).click(); // What's new page 2
         webDriver.findElement(By.xpath("//ul[@class='slick-dots testid-dots-button']//li[3]")).click(); // What's new page 3
+        webDriver.findElement(By.xpath("//ul[@class='slick-dots testid-dots-button']//li[4]")).click(); // What's new page 4
+        webDriver.findElement(By.xpath("//ul[@class='slick-dots testid-dots-button']//li[5]")).click(); // What's new page 5
         webDriver.findElement(By.cssSelector("[data-testid='WhatsNewModalChangeLogs']")).click(); // Change Logs
         webDriver.findElement(By.cssSelector("[data-testid='closeWhatsNew']")).click(); // Close What's new
     }

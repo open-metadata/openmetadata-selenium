@@ -1,9 +1,8 @@
-package org.openmetadata.selenium.pages;
+package org.openmetadata.selenium.pages.teams;
 
 import com.github.javafaker.Faker;
 import org.openmetadata.selenium.properties.Property;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
