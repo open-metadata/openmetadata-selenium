@@ -7,9 +7,17 @@
     </test>
     <test name="pagesTests">
         <classes>
-            <class name="org.openmetadata.selenium.pages.MyDataPageTest"/>
-            <class name="org.openmetadata.selenium.pages.TeamsPageTest"/>
-            <class name="org.openmetadata.selenium.pages.TagsPageTest"/>
+            <class name="org.openmetadata.selenium.pages.myData.MyDataPageTest"/>
+            <class name="org.openmetadata.selenium.pages.teams.TeamsPageTest"/>
+            <class name="org.openmetadata.selenium.pages.tags.TagsPageTest"/>
+        </classes>
+    </test>
+    <test name="servicePageTests">
+        <classes>
+            <class name="org.openmetadata.selenium.pages.databaseService.DatabaseServicePageTest"/>
+            <class name="org.openmetadata.selenium.pages.messagingService.MessagingServicePageTest"/>
+            <class name="org.openmetadata.selenium.pages.dashboardService.DashboardServiceTestPage"/>
+            <class name="org.openmetadata.selenium.pages.pipelineService.PipelineServiceTestPage"/>
         </classes>
     </test>
 </suite>

@@ -1,4 +1,4 @@
-package org.openmetadata.selenium.pages;
+package org.openmetadata.selenium.pages.tags;
 
 import com.github.javafaker.Faker;
 import org.openmetadata.selenium.properties.Property;
